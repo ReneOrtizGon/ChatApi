@@ -8,10 +8,10 @@
 </p>
 
 ## Introducción
-Este repositorio ha sido creado para mostrar el funcionaiento de un API en Laravel.
+Este repositorio ha sido creado para mostrar el funcionamiento de un API en Laravel.
 
 ## Se entrega
-* Un API Rest utilizando Laravel 11
+* Un API Rest utilizando Laravel 13
 * Método de autenticación requerido con JWT
 * Copia de código en Gitlab
 * Documentación del proyecto en este archivo
@@ -22,7 +22,7 @@ Este repositorio ha sido creado para mostrar el funcionaiento de un API en Larav
 * Tener descargador composer en tu equipo
 * Clonar el código en tu local
 * Instalar todos los paquetes de composer con: ```composer install```
-* Una vez descargador ejecutar el enterno de desarrollo con sail: ```./vendor/bin/sail up```
+* Una vez descargador ejecutar el entorno de desarrollo con sail: ```./vendor/bin/sail up```
 * En otra terminal ejecutar los siguientes comandos:
 * Ejecutar el siguiente comando para crear una alias y ejecutar solo sail: ```alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'```
 * Migración a la base de datos: ```sail artisan migrate```
