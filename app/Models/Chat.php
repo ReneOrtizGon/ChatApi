@@ -15,4 +15,13 @@ class Chat extends Model
     use HasFactory,  SoftDeletes;
 
 
+    public function message()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(ChatMember::class);
+    }
 }

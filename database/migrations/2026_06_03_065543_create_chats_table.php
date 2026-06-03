@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->integer('is_group')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chat_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();
-            $table->integer('is_ownner')->default(0);
+            $table->integer('is_owner')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();

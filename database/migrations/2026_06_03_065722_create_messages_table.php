@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title', 150)->nullable();
             $table->text('body');
             $table->integer('status')->default(1);
+            $table->integer('principal')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('owner_id')

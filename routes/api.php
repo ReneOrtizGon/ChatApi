@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,19 @@ Route::controller(UserController::class)
         Route::get('/all', 'index');
         Route::get('/{id}', 'show');
         Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+});
+
+// Chats
+Route::controller(ChatController::class)
+    ->middleware('jwt.verify')
+    ->prefix('threads')
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{id}', 'responseMessage');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
 });
