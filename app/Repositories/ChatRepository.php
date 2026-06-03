@@ -34,7 +34,7 @@ class ChatRepository implements ChatInterface
         /* Se obtiene los chats donde el usuario es miembro*/
         $data = Chat::whereHas('members', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->get();
+        })->paginate(10);
 
         /* a cada chat se le gregan sus miembros correspondientes*/
         $data->load(['members.user' => function ($query) {

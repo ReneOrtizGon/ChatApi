@@ -54,7 +54,7 @@ Route::controller(ChatController::class)
     ->middleware('jwt.verify')
     ->prefix('threads')
     ->group(function () {
-        Route::get('/', 'index');
+        Route::get('/{page?}', 'index');
         Route::get('/{id}', 'show');
         Route::post('/', 'store');
         Route::post('/{id}/messages', 'responseMessage');

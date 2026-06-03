@@ -7,6 +7,23 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ChatListCollection extends ResourceCollection
 {
+    public function __construct($resource)
+    {
+        $this->pagination = [
+            'total' => $resource->total(),
+            'per_page' => $resource->perPage(),
+            'current_page' => $resource->currentPage(),
+            'last_page' => $resource->lastPage(),
+            'from' => $resource->firstItem(),
+            'to' => $resource->lastItem(),
+            'count' => $resource->count(),
+            'total_pages' => $resource->lastPage()
+        ];
+
+        $resource = $resource->getCollection();
+
+        parent::__construct($resource);
+    }
     /**
      * Transform the resource collection into an array.
      *
@@ -14,6 +31,10 @@ class ChatListCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $this->pagination['data'] = $this->collection;
+
+        return [
+            $this->pagination
+        ];
     }
 }
