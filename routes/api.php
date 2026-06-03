@@ -53,10 +53,13 @@ Route::controller(ChatController::class)
     ->middleware('jwt.verify')
     ->prefix('threads')
     ->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{id}', 'show');
-        Route::post('/', 'store');
-        Route::post('/{id}', 'responseMessage');
+        Route::get('/', 'index'); //yaa traer chat del usuario
+
+        Route::get('/{id}', 'show'); //traer un chat especifico
+
+        Route::post('/', 'store'); //yaa crear nuevo
+        Route::post('/{id}/messages', 'responseMessage'); //yaa responder
+
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
 });

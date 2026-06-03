@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 use Firebase\JWT\JWT;
 
 class CustomPersonalAccessToken extends SanctumPersonalAccessToken

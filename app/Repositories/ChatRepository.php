@@ -23,6 +23,58 @@ class ChatRepository implements ChatInterface
     {
         return Chat::all();
     }
+    /**
+     * Regresa los chats del usuario logeado
+     * incluye los miembros del chat
+     * @param int $userId
+     * @return collection<chats>
+     */
+    public function getAllByUser($userId)
+    {
+        /* Se obtiene los chats donde el usuario es miembro*/
+        $data = Chat::whereHas('members', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+
+        /* a cada chat se le gregan sus miembros correspondientes*/
+        $data->load(['members.user' => function ($query) {
+            $query->select('id','name', 'email');
+        }]);
+
+        return $data;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Store a newly created resource in storage.

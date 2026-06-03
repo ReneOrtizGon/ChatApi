@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+/**
+ * @OA\Tag(
+ *     name="Users",
+ *     description="API Endpoints de usuarios"
+ * )
+ */
 class UserController extends Controller
 {
     private UserInterface $UserRepository;
@@ -20,9 +25,24 @@ class UserController extends Controller
     {
         $this->UserRepository = $UserRepository;
     }
-
-    /**
-     * Display a listing of the resource.
+/**
+     * @OA\Get(
+     *      path="/user/all",
+     *      tags={"getUser"},
+     *      summary="Obtiene la lista de usuarios pertenecientes al sistema",
+     *      @OA\Response(
+     *          response=200,
+     *          @OA\JsonContent(ref="#/components/schemas/UserResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
      */
     public function index()
     {
@@ -30,7 +50,25 @@ class UserController extends Controller
 
        return response()->ok(UserResource::collection($data));
     }
-
+    /**
+     * @OA\Get(
+     *      path="/api/user",
+     *      tags={"getUser"},
+     *      summary="Obtiene la informacion del usuario autenticado",
+     *      @OA\Response(
+     *          response=200,
+     *          @OA\JsonContent(ref="#/components/schemas/UserResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
+     */
     public function GetUser(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
@@ -45,8 +83,24 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
+/**
+     * @OA\Pot(
+     *      path="/user",
+     *      tags={"postUser"},
+     *      summary="Registra un usurio en el sistema",
+     *      @OA\Response(
+     *          response=201,
+     *          description="created",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
      */
     public function store(StoreUserRequest $request)
     {
@@ -69,7 +123,23 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/user/{id}",
+     *      tags={"getUserByID"},
+     *      summary="Obtiene un usuario registrado en elsistema",
+     *      @OA\Response(
+     *          response=200,
+     *          @OA\JsonContent(ref="#/components/schemas/UserResource")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
      */
     public function show(Request $request)
     {
@@ -92,7 +162,23 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\PUT(
+     *      path="/user/{id}",
+     *      tags={"editUser"},
+     *      summary="Actualiza la informacion de un usuarios",
+     *      @OA\Response(
+     *          response=204,
+     *          description="No content",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
      */
     public function update(UpdateUserRequest $request, $id)
     {
@@ -110,7 +196,23 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *      path="/user/{id}",
+     *      tags={"deleteUser"},
+     *      summary="Eliminar un usuario del sistema",
+     *      @OA\Response(
+     *          response=204,
+     *          description="no content",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="No autenticado",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Prohibido"
+     *      )
+     * )
      */
     public function destroy(Request $request)
     {

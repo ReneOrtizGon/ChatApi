@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Faker\Guesser\Name;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,7 @@ class StoreChatRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'nullable|string|max:100',
             'title' => 'nullable|string|max:100',
             'is_group' => 'required|boolean',
             'recipients' => 'required|array',
@@ -37,6 +39,8 @@ class StoreChatRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.string' => 'El campo title debe ser una cadena de texto.',
+            'name.max' => 'El campo title no debe exceder los 100 caracteres.',
             'title.string' => 'El campo title debe ser una cadena de texto.',
             'title.max' => 'El campo title no debe exceder los 100 caracteres.',
             'is_group.required' => 'El campo is_group es obligatorio.',
