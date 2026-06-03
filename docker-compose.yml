@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:8000"
+    volumes:
+      - '.:/var/www'
+    networks:
+      - laravel-net
+    depends_on:
+      - db
+  db:
+    image: postgres:17.2-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: secret
+    networks:
+      - laravel-net
+networks:
+  laravel-net:
+    driver: bridge
