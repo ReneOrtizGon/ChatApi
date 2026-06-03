@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ChatResource;
 use App\Http\Resources\ChatListCollection;
 use App\Http\Resources\MessageResource;
-
+use App\Notifications\MiNotificacion;
 use OpenApi\Attributes as OA;
 
 /**
@@ -190,6 +190,8 @@ class ChatController extends Controller
                 return response()->forbidden('You are not a member of this chat');
             }
 
+
+
             $recipients = $chat->members()->where('user_id', '!=', auth()->user()->id)->pluck('user_id')->toArray();
 
             $message = [
@@ -203,6 +205,9 @@ class ChatController extends Controller
             ];
 
             $message = $this->MessageRepository->create($message);
+
+
+            $this->notificar($chat->load('members'),$message);
             DB::commit();
             return response()->ok(new MessageResource($message));
         } catch (\Exception $e) {
@@ -268,5 +273,13 @@ class ChatController extends Controller
     public function destroy(Chat $chat)
     {
         //
+    }
+
+    public function notificar($recipients,$message){
+        foreach($recipients->members as $recipient){
+            $user = $recipient->load('user');
+            $user = $user->user;
+            $user->notify( new  MiNotificacion($message));
+        }
     }
 }

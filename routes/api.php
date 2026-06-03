@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,13 +54,21 @@ Route::controller(ChatController::class)
     ->middleware('jwt.verify')
     ->prefix('threads')
     ->group(function () {
-        Route::get('/', 'index'); //yaa traer chat del usuario
-
-        Route::get('/{id}', 'show'); //traer un chat especifico
-
-        Route::post('/', 'store'); //yaa crear nuevo
-        Route::post('/{id}/messages', 'responseMessage'); //yaa responder
-
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::post('/', 'store');
+        Route::post('/{id}/messages', 'responseMessage');
         Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+});
+
+//Notications
+Route::controller(NotificationController::class)
+    ->middleware('jwt.verify')
+    ->prefix('notifications')
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'show');
+        Route::put('/{id}', 'markAsRead');
         Route::delete('/{id}', 'destroy');
 });
