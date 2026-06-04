@@ -43,39 +43,6 @@ class ChatRepository implements ChatInterface
 
         return $data;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Store a newly created resource in storage.
      */

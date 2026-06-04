@@ -11,9 +11,9 @@ class NotificationController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/trheads",
-     *      tags={"getTrheads"},
-     *      summary="Obtiene la lista de hilos pertenecientes al usuario",
+     *      path="/notification",
+     *      tags={"getNotification"},
+     *      summary="Obtiene la lista de notificaciones pertenecientes al usuario",
      *      description="Regresa una lista de las conversaiones alas que pertenece el usuario",
      *      @OA\Response(
      *          response=200,
@@ -38,10 +38,10 @@ class NotificationController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/trheads/{id_trhead}",
-     *      tags={"readMessage"},
+     *      path="/notification/{id_trhead}",
+     *      tags={"readNotificacion"},
      *      summary="Devuelve una conversacion.",
-     *      description="Devueve una conversacion con sus miembro y mensajes",
+     *      description="Devueve una notificacion",
      *      @OA\Response(
      *          response=200,
      *          @OA\JsonContent(ref="#/components/schemas/ChatResource")
@@ -70,11 +70,10 @@ class NotificationController extends Controller
         return response()->ok($notification);
     }
     /**
-     * @OA\Get(
-     *      path="/trheads/{id_trhead}",
+     * @OA\Put(
+     *      path="/notification/{id_trhead}",
      *      tags={"readMessage"},
-     *      summary="Devuelve una conversacion.",
-     *      description="Devueve una conversacion con sus miembro y mensajes",
+     *      summary="Marcala notificacion como leida",
      *      @OA\Response(
      *          response=200,
      *          @OA\JsonContent(ref="#/components/schemas/ChatResource")

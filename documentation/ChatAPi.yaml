@@ -1,0 +1,359 @@
+openapi: 3.0.0
+info:
+  title: ChatAPi
+  version: 1.0.0
+paths:
+  chatapi.test/api/login:
+    post:
+      summary: Login
+      operationId: Login
+      description: ''
+      tags:
+        - AUTH
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: email
+          in: query
+          description: ''
+          required: false
+          example: rene@ho.com
+        - name: password
+          in: query
+          description: ''
+          required: false
+          example: password
+      requestBody:
+        $ref: '#/components/requestBodies/login'
+  chatapi.test/api/logout:
+    get:
+      summary: Logout
+      operationId: Logout
+      description: ''
+      tags:
+        - AUTH
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: email
+          in: query
+          description: ''
+          required: false
+          example: rene@ho.com
+        - name: password
+          in: query
+          description: ''
+          required: false
+          example: password
+      requestBody:
+        $ref: '#/components/requestBodies/logout'
+      security:
+        logout: []
+  chatapi.test/api/refresh:
+    get:
+      summary: Refresh
+      operationId: Refresh
+      description: ''
+      tags:
+        - AUTH
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: email
+          in: query
+          description: ''
+          required: false
+          example: rene@ho.com
+        - name: password
+          in: query
+          description: ''
+          required: false
+          example: password
+      security:
+        refresh: []
+  chatapi.test/api/user/3:
+    get:
+      summary: Get User by Id
+      operationId: Get User by Id
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      security:
+        get_user_by_id: []
+  chatapi.test/api/user/all:
+    get:
+      summary: Get Users
+      operationId: Get Users
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      security:
+        get_users: []
+  chatapi.test/api/user:
+    get:
+      summary: Get User
+      operationId: Get User
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      security:
+        get_user: []
+    post:
+      summary: Create
+      operationId: Create
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        $ref: '#/components/requestBodies/create'
+      security:
+        create: []
+  chatapi.test/api/user/6:
+    put:
+      summary: Update
+      operationId: Update
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        $ref: '#/components/requestBodies/update'
+      security:
+        update: []
+    delete:
+      summary: Delete
+      operationId: Delete
+      description: ''
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+      security:
+        delete: []
+  chatapi.test/api/threads:
+    post:
+      summary: create
+      operationId: create
+      description: ''
+      tags:
+        - Chats
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        $ref: '#/components/requestBodies/create'
+  chatapi.test/api/threads/1:
+    get:
+      summary: ReadOne
+      operationId: ReadOne
+      description: ''
+      tags:
+        - Chats
+      responses:
+        '200':
+          description: ''
+      security:
+        readone: []
+  chatapi.test/api/threads/3/messages:
+    post:
+      summary: ReponseMessage
+      operationId: ReponseMessage
+      description: ''
+      tags:
+        - Chats
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        $ref: '#/components/requestBodies/reponsemessage'
+  chatapi.test/api/threads/?page=4:
+    get:
+      summary: ReadAllByUser
+      operationId: ReadAllByUser
+      description: ''
+      tags:
+        - Chats
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: page
+          in: query
+          description: ''
+          required: true
+          example: '4'
+  chatapi.test/api/threads/3:
+    get:
+      summary: GetThread
+      operationId: GetThread
+      description: ''
+      tags:
+        - Chats
+      responses:
+        '200':
+          description: ''
+  chatapi.test/api/notifications/bbbc7f3d-acfb-4d9f-b9ea-c8f30e6a1c89:
+    delete:
+      summary: DeleteNotificaion
+      operationId: DeleteNotificaion
+      description: ''
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: ''
+    get:
+      summary: ReadNotification
+      operationId: ReadNotification
+      description: ''
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: ''
+    put:
+      summary: MarkAsRead
+      operationId: MarkAsRead
+      description: ''
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: ''
+  chatapi.test/api/notificaciones:
+    get:
+      summary: GetNotificaciones
+      operationId: GetNotificaciones
+      description: ''
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: ''
+servers: []
+components:
+  schemas:
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    logout:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    create:
+      type: object
+      properties:
+        title:
+          type: string
+        is_group:
+          type: boolean
+        recipients:
+          type: array
+          items:
+            type: string
+          properties:
+            '0':
+              type: number
+        message:
+          type: string
+    update:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    reponsemessage:
+      type: object
+      properties:
+        message:
+          type: string
+  requestBodies:
+    login:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/login'
+      description: ''
+      required: true
+    logout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/logout'
+      description: ''
+      required: true
+    create:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create'
+      description: ''
+      required: true
+    update:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update'
+      description: ''
+      required: true
+    reponsemessage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/reponsemessage'
+      description: ''
+      required: true
+  securitySchemes:
+    logout:
+      type: http
+      scheme: bearer
+    refresh:
+      type: http
+      scheme: bearer
+    get_user_by_id:
+      type: http
+      scheme: bearer
+    get_users:
+      type: http
+      scheme: bearer
+    get_user:
+      type: http
+      scheme: bearer
+    create:
+      type: http
+      scheme: bearer
+    update:
+      type: http
+      scheme: bearer
+    delete:
+      type: http
+      scheme: bearer
+    readone:
+      type: http
+      scheme: bearer
